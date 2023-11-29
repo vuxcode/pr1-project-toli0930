@@ -1,7 +1,7 @@
-const gameBoard = document.getElementById('game-board'); //canvas element
+const gameBoard = document.getElementById('game-board');
 const gameBoardWidth = gameBoard.width; //1350
 const gameBoardHeight = gameBoard.height; //585
-const context = gameBoard.getContext('2d'); //get access to the 2d interface things
+const ctx = gameBoard.getContext('2d');
 
 //because these values are used for two objects we can define them here
 //also because it didnt work when i tried to do this:
@@ -29,15 +29,21 @@ const rightPaddle = {
     width: paddleWidth,
     height: paddleHeight,  
 };
+const ball = {
+    x: gameBoardWidth/2,
+    y: gameBoardHeight/2,
+    width: 20,
+    height: 20
+}
 
 //and then draw them using the objects variables
-context.fillStyle = 'white';
-context.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
-context.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
+ctx.fillStyle = 'white';
+ctx.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
+ctx.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
+ctx.fillRect(ball.x, ball.y, ball.width, ball.height);
 
-//and later somehow define the logic for how they move
-//and redraw it every frame
-//we need to manipulate the values of leftPaddle.y and rightPaddle.y in a function and run the function every frame
+//ball just disappears for now because of clearRect
+//but when it also updates every frame, it won't
 
 addEventListener("keydown", function movePaddle(e){
     //move left paddle
@@ -48,15 +54,15 @@ addEventListener("keydown", function movePaddle(e){
             //parameters of clearRect() decide how much of the screen should be cleared
             //so if i divide the width by 2, it only clears half of it, i.e the left paddle
             //but wouldnt that clear the ball too, later? i guess well find out
-            context.clearRect(0, 0, gameBoard.width/2, gameBoard.height);
-            context.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
+            ctx.clearRect(0, 0, gameBoard.width/2, gameBoard.height);
+            ctx.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
         }
     } else if(e.key == "s"){
         downLeftIsPush = true;
         if(downLeftIsPush == true){
             leftPaddle.y = leftPaddle.y + 5;
-            context.clearRect(0, 0, gameBoard.width/2, gameBoard.height);
-            context.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
+            ctx.clearRect(0, 0, gameBoard.width/2, gameBoard.height);
+            ctx.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
         }
     }
     //move right paddle
@@ -65,15 +71,15 @@ addEventListener("keydown", function movePaddle(e){
         if(upRightIsPush == true){
             rightPaddle.y = rightPaddle.y - 5;
             //instead of dividing how much of the screen i can decide the start coordinate. which is the half point of the screen
-            context.clearRect(gameBoardWidth/2, 0, gameBoard.width, gameBoard.height);
-            context.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
+            ctx.clearRect(gameBoardWidth/2, 0, gameBoard.width, gameBoard.height);
+            ctx.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
         }
     } else if(e.key == "ArrowDown"){
         downRightIsPush = true;
         if(downRightIsPush == true){
             rightPaddle.y = rightPaddle.y + 5;
-            context.clearRect(gameBoardWidth/2, 0, gameBoard.width / 2, gameBoard.height);
-            context.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
+            ctx.clearRect(gameBoardWidth/2, 0, gameBoard.width / 2, gameBoard.height);
+            ctx.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
         }
     } 
 })
@@ -95,7 +101,7 @@ function gameLoop(){
     //hitting ceiling or floor stops paddle
     if(leftPaddle.y < 0){
         leftPaddle.y = 0;
-    } else if(leftPaddle.y > 500){ //for some reason 500 works instead of the value of gameBoardHeight (585) ?????
+    } else if(leftPaddle.y > 500){ //for some reason 500 works but not the value of gameBoardHeight (585) ?????
         leftPaddle.y = 500;
         console.log("hit floor");
     } else if(rightPaddle.y < 0){
@@ -110,4 +116,3 @@ setInterval(gameLoop, 10);
 
 //to move the paddles simultaneously we can create an empty array and add the currently held keys to it
 //if array contains key move paddle
-
