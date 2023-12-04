@@ -48,17 +48,13 @@ ctx.fillRect(ball.x, ball.y, ball.size, ball.size);
 //ball just disappears for now because of clearRect
 //but when it also updates every frame like the paddles, it won't
 
-addEventListener("keydown", function movePaddleL(e){
-    //move left paddle
+//activate movement bools
+addEventListener("keydown", function movePaddle(e){
     if(e.key == "w"){
         isPushing.upL = true;
     } else if(e.key == "s"){
         isPushing.downL = true;
     }
-})
-
-addEventListener("keydown", function movePaddleR(e){
-    //move right paddle
     if(e.key == "ArrowUp"){
         isPushing.upR = true;
     } else if(e.key == "ArrowDown"){
@@ -66,7 +62,7 @@ addEventListener("keydown", function movePaddleR(e){
     } 
 })
 
-//paddles stop moving when key is released
+//deactivate movement bools
 addEventListener('keyup', function(e){
     if(e.key == 'w'){
         isPushing.upL = false;
@@ -80,19 +76,7 @@ addEventListener('keyup', function(e){
 })
 
 function gameLoop(){
-    //hitting ceiling or floor stops paddle
-    if(leftPaddle.y < 0){
-        leftPaddle.y = 0;
-    } else if(leftPaddle.y > gameBoard.height-80){ //i don't understand why it's not correct unless i subtract the height a bit
-        leftPaddle.y = gameBoard.height-80;
-    }
-    if(rightPaddle.y < 0){
-        rightPaddle.y = 0;
-    } else if(rightPaddle.y > gameBoard.height-80){
-        rightPaddle.y = gameBoard.height-80;
-    }
-
-    //control the paddles
+    //control the paddles based on the bools we activated
     if(isPushing.upL == true){
         leftPaddle.y = leftPaddle.y - paddleVel;
         //parameters of clearRect() decide how much of the screen should be cleared
@@ -113,6 +97,18 @@ function gameLoop(){
         rightPaddle.y = rightPaddle.y + paddleVel;
         ctx.clearRect(gameBoard.width/2, 0, gameBoard.width / 2, gameBoard.height);
         ctx.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
+    }
+
+    //hitting ceiling or floor stops paddle
+    if(leftPaddle.y < 0){
+        leftPaddle.y = 0;
+    } else if(leftPaddle.y > gameBoard.height-80){ //i don't understand why it's not correct unless i subtract the height a bit
+        leftPaddle.y = gameBoard.height-80;
+    }
+    if(rightPaddle.y < 0){
+        rightPaddle.y = 0;
+    } else if(rightPaddle.y > gameBoard.height-80){
+        rightPaddle.y = gameBoard.height-80;
     }
 }
 
