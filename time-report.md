@@ -28,3 +28,17 @@ I've also noticed it uses PEMDAS so the parantheses in the operation isn't neede
 Yesterday, I got the paddles to move the way I want them. May not be perfect code, but for now, I'm just aiming for it to work at all. It's time to learn how to make the ball move.
 
 I realized that there's no real difference (in this case) between creating "loose" variables vs storing them in objects. Meaning I could remove the paddle and ball objects and instead just make them variables called rightPaddleX and so on. I think the objects look cleaner, though, so I stored the isPushing bools inside an object too.
+
+3/12-2023:
+Instead of having arbitrary numbers like 40 and 70 for the x-value in my paddle objects, I changed it to variables, like so:
+var distanceFromSide = 40;
+var paddleWidth = 30;
+const rightPaddle = {
+    x: gameBoard.width-(distanceFromSide+paddleWidth),
+}
+to make the paddles always equally distanced from the side, even if I wanted to change the values. Say I wanted to optimize it for a different screen resolution, for example.
+
+
+4/12-2023
+I don't know how to make the ball move, so I'll look at my collection of Pongs I've found online, to see how they did it. I obviously don't want to plagiarize, though.
+Did some cleanup of the code.
