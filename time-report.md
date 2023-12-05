@@ -43,9 +43,14 @@ to make the paddles always equally distanced from the side, even if I wanted to 
 I don't know how to make the ball move, so this week I'll look at my collection of Pongs I've found online, to see how they did it. I obviously don't want to plagiarize, though.
 Did some cleanup of the code, such as removing unnecessary lines, fixing the inconsistency of sometimes using gameBoard.height and sometimes gameBoardHeight, and combining the movePaddle functions.
 
-
 Some other Pongs:
 https://codepen.io/gdube/pen/JybxxZ
 https://www.geeksforgeeks.org/pong-game-in-javascript/
 https://gist.github.com/straker/81b59eecf70da93af396f963596dfdc5
-https://github.com/SethClydesdale/browser-pong
+https://github.com/SethClydesdale/browser-
+
+5/12-2023
+Realized I could optimize the clearRect() and fillRect() to only be written once in the gameLoop().
+In specifically this Pong: https://gist.github.com/straker/81b59eecf70da93af396f963596dfdc5
+they make the ball move exactly like the paddle, by updating the y and x coordinates of the ball with a velocity value and then redrawing it. Not sure there's any other way of doing it in JS canvas. I did that, and now the ball moves, but can not collide.
+Tried to make it collide. Doesn't work. Figuring it out later.
