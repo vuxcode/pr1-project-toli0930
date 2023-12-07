@@ -47,10 +47,23 @@ Some other Pongs:
 https://codepen.io/gdube/pen/JybxxZ
 https://www.geeksforgeeks.org/pong-game-in-javascript/
 https://gist.github.com/straker/81b59eecf70da93af396f963596dfdc5
-https://github.com/SethClydesdale/browser-
+https://github.com/SethClydesdale/browser-pong
 
 5/12-2023
 Realized I could optimize the clearRect() and fillRect() to only be written once in the gameLoop().
 In specifically this Pong: https://gist.github.com/straker/81b59eecf70da93af396f963596dfdc5
 they make the ball move exactly like the paddle, by updating the y and x coordinates of the ball with a velocity value and then redrawing it. Not sure there's any other way of doing it in JS canvas. I did that, and now the ball moves, but can not collide.
 Tried to make it collide. Doesn't work. Figuring it out later.
+
+7/12-2023
+I can't use the same variable for moving the ball (ballVel), I need to also make a separation between its movement in the y vs the x direction.
+Might be more readable to reorder the clearRect() and fillRect() stuff to the bottom of the gameLoop(), even though it doesn't technically NEED to be after EVERYTHING in the loop.
+Needed some help from the Pong I've been looking at again, the one that's been of most help throughout the project: https://gist.github.com/straker/81b59eecf70da93af396f963596dfdc5
+I've realized there's two different ways of reversing a variable value, they seem to have the same effect.
+    myVar = -myVar;
+    myVar *= -1;
+Another thing I could do with the clearRect() fillRect() stuff is stick it to the top of the gameLoop() and remove them from outside the function. Optimization! Also makes them black for some reason.
+
+The ball collides with the paddles now. I needed to figure out how to define the paddles location so I could compare when the ball hits it, but otherwise it's just another if-statement.
+
+The basic game works, could be made cleaner but it works.
