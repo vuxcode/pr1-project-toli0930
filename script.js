@@ -4,10 +4,11 @@ const gameBoard = document.getElementById('game-board');
 const ctx = gameBoard.getContext('2d');
 
 //paddle variables
-var paddleHeight = 130;
+var paddleHeight = 120;
 var paddleWidth = 30;
 var paddleVel = 4;
 var distanceFromSide = 40;
+var shrinkPaddle = 20;
 
 //player score
 var leftScore = 0;
@@ -16,7 +17,6 @@ var rightScore = 0;
 //ball variables
 var ballSize = 20;
 var ballVel = 3.0;
-var accelerateBall = 1.1;
 
 //bools for when the controlling keys are being pushed
 var isPushing = {
@@ -74,7 +74,22 @@ addEventListener('keyup', function stopPaddle(e){
     }
 })
 
+//win message
+function winMessage(winner){
+    if(leftPaddle.height == 0){
+        winner = "LEFT";
+    } else if(rightPaddle.height == 0){
+        winner = "RIGHT";
+    }
+    alert(winner+" WINS!");
+}
+
 function gameLoop(){
+    //display win message
+    if(leftPaddle.height == 0 || rightPaddle.height == 0){
+        setTimeout(winMessage, 60);
+    }
+
     //clear and draw paddles and ball again every frame
     ctx.clearRect(0, 0, gameBoard.width, gameBoard.height);
     ctx.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
@@ -114,14 +129,14 @@ function gameLoop(){
         ball.yDir *= -1;
     }
 
-    //hitting paddle makes ball reverse x value and speed up a little bit
+    //hitting paddle makes ball reverse x value and shrinks paddle
     if((ball.x==rightPaddle.x && ball.y>rightPaddle.y && ball.y<(rightPaddle.y+rightPaddle.height))){
         ball.xDir *= -1;
-        rightPaddle.height -= 5;
+        rightPaddle.height -= shrinkPaddle;
     }
     if(ball.x==(leftPaddle.x+leftPaddle.width) && ball.y>leftPaddle.y && ball.y<(leftPaddle.y+leftPaddle.height)){
         ball.xDir *= -1;
-        leftPaddle.height -= 5;
+        leftPaddle.height -= shrinkPaddle;
     }
 
     //if ball goes out of screen, reset its position to where it was originally, swap direction and update score
@@ -139,6 +154,7 @@ function gameLoop(){
         rightScore++;
         console.log("right scored "+rightScore);
     }
+
 }
 
 //runs game

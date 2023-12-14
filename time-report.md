@@ -72,3 +72,4 @@ The basic game works, could be made cleaner but it works.
 Realized one important purpose of separating paddleHeight and the individual paddles Paddle.height. A way to accelerate the difficulty could be to make the paddles smaller, but they need to keep being redrawn the new size as well. There's no need to use the paddleHeight variable anywhere other than for the paddle objects.
 Because the paddles heights become two different variables this way, I can change them separately. The paddle that sees more success becomes more difficult than the other.
 Could make for interesting gameplay potential, such as "the player who makes their paddle disappear first is the winner". That game would only work if the ball swapped direction when going out of screen, so I'll fix that.
+Made a win condition, and a message function that can say either RIGHT or LEFT wins.
