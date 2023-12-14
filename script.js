@@ -4,17 +4,21 @@ const gameBoard = document.getElementById('game-board');
 const ctx = gameBoard.getContext('2d');
 
 //paddle variables
-var paddleHeight = 80;
+var paddleHeight = 130;
 var paddleWidth = 30;
 var paddleVel = 4;
 var distanceFromSide = 40;
 
+//player score
+var leftScore = 0;
+var rightScore = 0;
+
 //ball variables
 var ballSize = 20;
-var ballVel = 3;
+var ballVel = 3.0;
+var accelerateBall = 1.1;
 
 //bools for when the controlling keys are being pushed
-//also stored in an object because it looks neat
 var isPushing = {
     upL: false,
     downL: false,
@@ -92,13 +96,13 @@ function gameLoop(){
     //hitting ceiling or floor stops paddle
     if(leftPaddle.y < 0){
         leftPaddle.y = 0;
-    } else if(leftPaddle.y > gameBoard.height-paddleHeight){//i get why i need to subtract 80 now, its because of the height of the paddle
-        leftPaddle.y = gameBoard.height-paddleHeight;
+    } else if(leftPaddle.y > gameBoard.height-leftPaddle.height){//subtract the paddle height to define the correct coordinate
+        leftPaddle.y = gameBoard.height-leftPaddle.height;
     }
     if(rightPaddle.y < 0){
         rightPaddle.y = 0;
-    } else if(rightPaddle.y > gameBoard.height-paddleHeight){
-        rightPaddle.y = gameBoard.height-paddleHeight;
+    } else if(rightPaddle.y > gameBoard.height-rightPaddle.height){
+        rightPaddle.y = gameBoard.height-rightPaddle.height;
     }
 
     //move ball by updating ball coordinates with whatever value i set as the velocity
@@ -110,16 +114,30 @@ function gameLoop(){
         ball.yDir *= -1;
     }
 
-    //hitting paddle makes ball reverse x value
-    if(ball.x==rightPaddle.x && ball.y>rightPaddle.y && ball.y<(rightPaddle.y+rightPaddle.height)){
+    //hitting paddle makes ball reverse x value and speed up a little bit
+    if((ball.x==rightPaddle.x && ball.y>rightPaddle.y && ball.y<(rightPaddle.y+rightPaddle.height))){
         ball.xDir *= -1;
-    } else if(ball.x==(leftPaddle.x+leftPaddle.width) && ball.y>leftPaddle.y && ball.y<(leftPaddle.y+leftPaddle.height)){
+        rightPaddle.height -= 5;
+    }
+    if(ball.x==(leftPaddle.x+leftPaddle.width) && ball.y>leftPaddle.y && ball.y<(leftPaddle.y+leftPaddle.height)){
         ball.xDir *= -1;
+        leftPaddle.height -= 5;
     }
 
-    if(ball.x>gameBoard.width || ball.x<0){
+    //if ball goes out of screen, reset its position to where it was originally, swap direction and update score
+    if(ball.x>gameBoard.width){
         ball.x = gameBoard.width/2;
         ball.y = gameBoard.height/2;
+        ball.xDir *= -1;
+        leftScore++;
+        console.log("left scored "+leftScore);
+    }
+    if(ball.x<0){
+        ball.x = gameBoard.width/2;
+        ball.y = gameBoard.height/2;
+        ball.xDir *= -1;
+        rightScore++;
+        console.log("right scored "+rightScore);
     }
 }
 

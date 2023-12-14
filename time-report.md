@@ -67,3 +67,8 @@ Another thing I could do with the clearRect() fillRect() stuff is stick it to th
 The ball collides with the paddles now. I needed to figure out how to define the paddles location so I could compare when the ball hits it, but otherwise it's just another if-statement.
 
 The basic game works, could be made cleaner but it works.
+
+14/12-2023
+Realized one important purpose of separating paddleHeight and the individual paddles Paddle.height. A way to accelerate the difficulty could be to make the paddles smaller, but they need to keep being redrawn the new size as well. There's no need to use the paddleHeight variable anywhere other than for the paddle objects.
+Because the paddles heights become two different variables this way, I can change them separately. The paddle that sees more success becomes more difficult than the other.
+Could make for interesting gameplay potential, such as "the player who makes their paddle disappear first is the winner". That game would only work if the ball swapped direction when going out of screen, so I'll fix that.
