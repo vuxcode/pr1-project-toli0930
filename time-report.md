@@ -73,3 +73,6 @@ Realized one important purpose of separating paddleHeight and the individual pad
 Because the paddles heights become two different variables this way, I can change them separately. The paddle that sees more success becomes more difficult than the other.
 Could make for interesting gameplay potential, such as "the player who makes their paddle disappear first is the winner". That game would only work if the ball swapped direction when going out of screen, so I'll fix that.
 Made a win condition, and a message function that can say either RIGHT or LEFT wins.
+Set a timeout of 60 seconds before the win alert appears, so that we can actually see the paddle disappear when it wins.
+Found a ding noise when the paddle hits ball on https://opengameart.org/content/gui-sound-effects
+Added it because it's easy

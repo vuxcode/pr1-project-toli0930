@@ -2,6 +2,7 @@ console.clear();
 
 const gameBoard = document.getElementById('game-board');
 const ctx = gameBoard.getContext('2d');
+var audio = new Audio('misc_menu_2.wav');
 
 //paddle variables
 var paddleHeight = 120;
@@ -132,10 +133,12 @@ function gameLoop(){
     //hitting paddle makes ball reverse x value and shrinks paddle
     if((ball.x==rightPaddle.x && ball.y>rightPaddle.y && ball.y<(rightPaddle.y+rightPaddle.height))){
         ball.xDir *= -1;
+        audio.play();
         rightPaddle.height -= shrinkPaddle;
     }
     if(ball.x==(leftPaddle.x+leftPaddle.width) && ball.y>leftPaddle.y && ball.y<(leftPaddle.y+leftPaddle.height)){
         ball.xDir *= -1;
+        audio.play();
         leftPaddle.height -= shrinkPaddle;
     }
 
