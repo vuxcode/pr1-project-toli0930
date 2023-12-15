@@ -1,6 +1,7 @@
 .pong {
     position: absolute;
     top: 10%;
+    color: white;
 }
 
 * {
@@ -12,7 +13,7 @@
 body {
     height: 100vh;
     width: 100vw;
-    background-image: black;
+    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,6 +23,6 @@ body {
     height: 85vh;
     width: 80vw;
     background-image: linear-gradient(
-        to top, rgb(102, 102, 102), rgb(170, 170, 170));
+        to left, rgb(65, 70, 78), rgb(82, 66, 66));
 }
 
