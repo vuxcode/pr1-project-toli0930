@@ -56,3 +56,5 @@ to:
     }
 
 since everything else needs to be false for one thing to be true. This way, they can both be true/false independently.
+
+3. The game only works on Live Server. The JS code doesn't run if you just open the index.html file. Something something browser security annoying and wants you to use HTTP. Can't do anything about it.

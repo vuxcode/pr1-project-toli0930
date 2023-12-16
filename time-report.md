@@ -83,3 +83,6 @@ In an attempt to create restart game functionality, my computer crashed. Oops.
 Apparently you can break setInterval loops with clearInterval, let me try that, aaand it worked. Hooray.
 The game gets faster every time I restart it for some reason?? And the winMessage() is called twice?? But it can't find "RIGHT" or "LEFT" because the condition isn't met, so it becomes undefined.
 I'm guessing the game gets faster because calling the runGame() again the game run... twice, and then thrice, and so on? And the clearInterval() doesn't actually do anything, why? But it's ok, because I don't need anything to stop or restart the game, in this case. And doing else{return;} works on the winMessage for some reason. It seems to exit the function, and since the conditions aren't met, it won't run twice. No idea why it would in the first place, but now it works.
+
+16/12-2023
+Removed secret console scoreboard because it saves a lot of lines of code and is unnecessary with the win condition gameplay goal thingy of destroying your paddle.

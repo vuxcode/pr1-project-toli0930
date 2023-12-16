@@ -5,7 +5,7 @@ const ctx = gameBoard.getContext('2d');
 var ding = new Audio('ding.wav');
 var yay = new Audio('yay.mp3');
 var miss = new Audio('miss.wav');
-var gameSpeed = 30; //game runs every gameSpeed milliseconds
+var gameSpeed = 25; //game runs every gameSpeed milliseconds
 
 //paddle variables
 var paddleHeight = 120;
@@ -76,7 +76,7 @@ addEventListener('keyup', function stopPaddle(e){
     } else if(e.key == 'ArrowDown'){
         isPushing.downR = false;
     }
-})
+});
 
 //what happens when someone wins
 function resetVariables(){
@@ -112,7 +112,7 @@ function winMessage(winner){
     resetVariables();
 }
 
-//everything within this is meant to run every x milliseconds
+//everything within this is meant to run every gameSpeed milliseconds
 function gameLoop(){
     //display win message
     if(leftPaddle.height == 0 || rightPaddle.height == 0){
@@ -174,28 +174,14 @@ function gameLoop(){
         leftPaddle.height -= shrinkPaddle;
     }
 
-    //if ball goes out of screen, reset its position to where it was originally, swap direction and update score
-    if(ball.x>gameBoard.width){
+    //if ball goes out of screen
+    if(ball.x>gameBoard.width || ball.x<0){
         miss.play();
         ball.x = gameBoard.width/2;
         ball.y = gameBoard.height/2;
         ball.xDir *= -1;
-        leftScore++;
-        console.log("left scored "+leftScore);
-    }
-    if(ball.x<0){
-        miss.play();
-        ball.x = gameBoard.width/2;
-        ball.y = gameBoard.height/2;
-        ball.xDir *= -1;
-        rightScore++;
-        console.log("right scored "+rightScore);
     }
 }
 
 //run the game
-function runGame(){
-    setInterval(gameLoop, gameSpeed);
-}
-
-var loop = runGame();
+setInterval(gameLoop, gameSpeed);

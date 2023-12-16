@@ -13,6 +13,14 @@ The final program is not the goal! The aim of the project is to show how you hav
 
 > Before the final submission date you should include a "PROJECT SUMMARY" in this section here. 
 
+I would guess most people are familiar with Pong, and in the rare case they are not, they can grasp it without explanation quickly enough.
+For the even rarer case that neither of these conditions should be met: It's a game where you can move two paddles to hit an automatically moving ball in order to avoid it from making its way into your goal.
+The added twist is that the paddles get smaller with every hit. The one who makes their paddle small enough to disappear first is the winner. In this game, the way to victory is through killing yourself.
+
 # User Guide
 
 > Write a clear user guide for how someone should use your program.
+
+Move the left paddle with W and S, and the right paddle with arrow up and arrow down.
+Play against a friend. Play against yourself. Engage in roleplay about the rivalry of two goalkeepers or something, I don't know, do whatever you want.
+Note that you need to open the index.html file with Live Server extension on VS Code, or use some other kind of local hosting, simply opening the index.html file will probably not execute the Javascript code because web browsers are weird.
